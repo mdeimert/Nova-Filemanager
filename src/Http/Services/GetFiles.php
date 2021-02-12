@@ -320,7 +320,7 @@ trait GetFiles
 
         if (Str::contains($mime, 'image') || $extension == 'svg') {
             if (method_exists($this->storage, 'put')) {
-                return $this->storage->url($file['path']);
+                return $this->storage->temporaryUrl($file['path'], '+5 minutes');
             }
 
             return $folder.'/'.$file['basename'];
