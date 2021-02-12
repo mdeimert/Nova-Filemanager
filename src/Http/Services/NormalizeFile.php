@@ -50,7 +50,7 @@ class NormalizeFile
             'mime' => $this->getCorrectMimeFileType(),
             'path' => $this->storagePath,
             'size' => $this->getFileSize(),
-            'url'  => $this->cleanSlashes($this->storage->url($this->storagePath)),
+            'url'  => $this->cleanSlashes($this->storage->temporaryUrl($this->storagePath, '+5 minutes')),
             'date' => $this->modificationDate(),
             'ext'  => $this->file->getExtension(),
         ]);
@@ -145,7 +145,7 @@ class NormalizeFile
     private function getImage($mime, $extension = false)
     {
         if (Str::contains($mime, 'image') || $extension == 'svg') {
-            return $this->storage->url($this->storagePath);
+            return $this->storage->temporaryUrl($this->storagePath, '+5 minutes');
         }
 
         $fileType = new FileTypesImages();
